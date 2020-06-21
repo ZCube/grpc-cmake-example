@@ -1,9 +1,3 @@
-# grpc-cmake-example
-
-Simple example for grpc example with conan.
-
-### CMakeLists.txt
-```
 cmake_minimum_required(VERSION 3.0)
 project(Project CXX)
 
@@ -28,18 +22,3 @@ include(${CMAKE_BINARY_DIR}/cmake/grpc.cmake)
 add_executable(main main.cpp helloworld.proto)
 target_link_libraries(main CONAN_PKG::grpc)
 grpc_generate(TARGET main)
-```
-
-### conanfile.py
-```
-from conans import ConanFile, CMake
-
-class GrpcExampleConan(ConanFile):
-   settings = "os", "compiler", "build_type", "arch"
-   requires = "grpc/1.29.1@zcube/stable", "openssl/1.1.1g", "zlib/1.2.11"
-   generators = "cmake"
-   default_options = {}
-
-   def imports(self):
-       self.copy("*.cmake", dst="cmake", src="cmake") # From cmake to cmake
-```
